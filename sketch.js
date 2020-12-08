@@ -90,12 +90,14 @@ function draw() {
     //scoring
     score = score + Math.round(getFrameRate() /60);
     
-    if(score>0 && score%100 === 0){
-       
-    }
+    
     
     if (ground.x < 0){
       ground.x = ground.width/2;
+    }
+    if(frameCount % 500 === 0){
+      trex.scale=trex.scale+0.05;
+     
     }
     
     //jump when the space key is pressed
@@ -112,18 +114,21 @@ function draw() {
     //spawn obstacles on the ground
     spawnObstacles();
     
+    if(score>0 && score%100 === 0){
+      trex.scale=trex.scale+0.05; 
+    }
   
     if(obstaclesGroup.isTouching(trex)){
-      if(trex.scale=0.1){
+      if(trex.scale>0.1){
+        trex.scale=trex.scale-0.05;
+        }
+      if(trex.scale<=0.1){
         
         gameState = END;
       }
       
     }
-    if(frameCount % 500 === 0){
-      trex.scale=trex.scale+0.05;
-     
-    }
+    
   }
   
    else if (gameState === END) {
